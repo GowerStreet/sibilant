@@ -34,13 +34,21 @@
 
 ## Installation
 
-First, install [node.js](http://nodejs.org) [
-[github](http://github.com/ry/node) ] and [npm](http://npmjs.org) [
-[github](http://github.com/isaacs/npm) ].  Then, it's as simple as:
+For local dev:
 
-    $ npm install sibilant -g
-    $ sibilant --help
-    
+    $ git clone git://github.com/jbr/sibilant.git
+    $ npm link .
+    $ sibilant src/*.sibilant -o lib
+    $ sibilant -x test/test.sibilant # you're now running a sibilant you just compiled.
+
+To have sibilant recompile on any change to its source:
+
+    $ npx nodemon -e sibilant -w src -x sibilant src/*.sibilant -o lib
+
+For use in our projects:
+
+    $ npm i --save GowerStreet/sibilant # pulls from github, or local if you did npm link
+
 ## Hello world in the REPL
 
     $ sibilant
