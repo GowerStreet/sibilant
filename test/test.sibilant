@@ -144,6 +144,18 @@
   }
 }).call(this)")
 
+; ternary
+
+(assert-translation "(ternary a b c)"
+"(function() {
+  return (a) ? b : c;
+}).call(this)")
+
+(assert-translation "(\"prefix-\" (ternary true \"b\" \"c\") \"-suffix\")"
+"(\"prefix-\" + (function() {
+  return (true) ? \"b\" : \"c\";
+}).call(this) + \"-suffix\")")
+
 ; do
 
 (assert-translation "(do a b c d e)"
@@ -710,8 +722,12 @@ b();"))
 })"))
 
 (assert-translation "(default foo 1 bar 2)"
-                    "foo = (typeof foo !== \"undefined\") ? foo : 1;
-bar = (typeof bar !== \"undefined\") ? bar : 2;")
+                    "foo = (function() {
+  return (typeof foo !== \"undefined\") ? foo : 1;
+}).call(this);
+bar = (function() {
+  return (typeof bar !== \"undefined\") ? bar : 2;
+}).call(this);")
 
 
 (assert-translation "(pipe a (b c) (d e) (+ 1) (.to-string) (.to-upper-case))"

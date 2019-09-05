@@ -7,10 +7,15 @@
          "fifty is more than 100"))
 
 (macro ternary (cond if-true if-false)
-       ["(" (transpile cond) ") ? "
-            (transpile if-true) " : "
-            (transpile if-false)])
-
+       ["(function() {"
+        (indent ["return ("
+                 (transpile cond)
+                 ") ? "
+                 (transpile if-true)
+                 " : "
+                 (transpile if-false)
+                 ";"])
+        "}).call(this)"])
 
 (docs "evaluates statements in `body` if `condition` is true. `body`
       is `scoped` in a self-evaluating function to support having a
