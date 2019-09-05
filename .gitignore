@@ -5,3 +5,9 @@ tmp/*
 node_modules
 .sass-cache
 .#*
+lib/*
+!lib/browser.js
+!lib/cli.js
+!lib/options.js
+!lib/repl.js
+!lib/sibilant.js

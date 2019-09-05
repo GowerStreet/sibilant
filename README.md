@@ -34,6 +34,8 @@
 
 ## Installation
 
+Use version 12.10.0 of node for transpiling Sibilant itself.
+
 For local dev:
 
     $ git clone git://github.com/jbr/sibilant.git
